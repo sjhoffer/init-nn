@@ -1,4 +1,5 @@
 import gym
+from gym import wrappers
 import numpy as np
 import random
 import tensorflow as tf
@@ -6,7 +7,9 @@ import matplotlib.pyplot as plt
 
 env = gym.make('FrozenLake-v0')
 
-tf.reset_default_graph()
+env = wrappers.Monitor(env, '/tmp/FrozenLake-v0-log')
+
+tf.reset_default_graph() 
 
 #These lines establish the feed-forward part of the network used to choose actions
 inputs1 = tf.placeholder(shape=[1,16],dtype=tf.float32)
